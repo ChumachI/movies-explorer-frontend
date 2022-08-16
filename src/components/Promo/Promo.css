@@ -1,0 +1,53 @@
+.promo {
+  background-image: url(../../images/landing-П-logo.svg);
+  background-position: top 40% left 50%;
+  background-repeat: no-repeat;
+  background-color: #465dff;
+  min-height: 524px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.promo__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  position: relative;
+  bottom: 20px;
+  margin: 0;
+  letter-spacing: -0.04em;
+  max-width: 730px;
+}
+
+@media screen and (max-width: 769px) {
+  .promo {
+    min-height: 784px;
+    background-position: top 48.2% left 50%;
+  }
+
+  .promo__title {
+    bottom: 9px;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .promo__title {
+    font-size: 31px;
+    line-height: 39px;
+    letter-spacing: -0.04em;
+    bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .promo {
+    background-image: url(../../images/landing-П-logo-mini.svg);
+    min-height: 570px;
+    background-position: top 44% left 50%;
+  }
+}

@@ -1,0 +1,126 @@
+.aboutProject {
+    padding: 110px 70px;
+    box-sizing: border-box;
+}
+
+.about-project__two-columns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+    margin-bottom: 110px;
+}
+
+.about-project__column {
+    max-width: 550px;
+}
+
+.about-project__column-header {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+    margin: 0;
+    margin-bottom: 26px;
+}
+
+.about-project__timeline {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.about-project__timeline-part {
+    min-height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+}
+
+.about-project__timeline-part_color_green {
+    background-color: #2BE080;
+}
+
+.about-project__timeline-part_color_grey {
+    background-color: #F2F2F2;
+}
+
+.about-project__timeline-weeks {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+    max-width: 600px;
+}
+
+.about-project__timeline-caption {
+    justify-self: center;
+    color: #A0A0A0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 769px) {
+    .aboutProject {
+        padding: 90px 50px;
+    }
+
+    .about-project__two-columns{
+        gap: 30px;
+        margin-bottom: 93px;
+    }
+
+    .about-project__column-header {
+        margin-bottom: 22px;
+    }
+
+    .about-project__timeline {
+        grid-template-columns: 140px 528px;
+    }
+
+    .about-project__timeline-caption {
+        font-weight: 400;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .about-project__timeline {
+        grid-template-columns: 21% 79%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .aboutProject {
+        padding: 70px 18px;
+    }
+
+    .about-project__two-columns {
+        flex-direction: column;
+        margin-top: 60px;
+        margin-bottom: 60px;
+        gap: 56px;
+    }
+
+    .about-project__column-header {
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 16px;
+    }
+
+    .about-project__timeline {
+        grid-template-columns: 35% 65%;
+    }
+
+    .about-project__timeline-weeks {
+        font-size: 11px;
+        line-height: 13px;
+    }
+    .about-project__timeline-caption {
+        font-size: 11px;
+        line-height: 13px;
+        margin-top: 10px;
+    }
+}
