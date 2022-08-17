@@ -41,7 +41,7 @@
   transition: opacity 0.2s linear;
 }
 
-.movies__search-button:hover {
+.search-form__button:hover {
   cursor: pointer;
   opacity: 0.8;
 }
