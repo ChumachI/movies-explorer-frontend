@@ -38,6 +38,7 @@ function MoviesCardList({ cards }) {
       </ul>
       <button
         className="movies-list__more-button"
+        type="button"
         disabled={isEachCardShown}
         onClick={handleMoreButtonClick}
       >

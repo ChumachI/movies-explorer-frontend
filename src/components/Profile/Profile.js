@@ -15,10 +15,13 @@ function Profile({ name, email, handleExit }) {
         </div>
       </div>
       <div className="profile__bottom-buttons">
-        <button className="profile__bottom-button">Редактировать</button>
+        <button className="profile__bottom-button" type="button">
+          Редактировать
+        </button>
         <button
           className="profile__bottom-button profile__bottom-button_color_red"
           onClick={handleExit}
+          type="button"
         >
           Выйти из аккаунта
         </button>

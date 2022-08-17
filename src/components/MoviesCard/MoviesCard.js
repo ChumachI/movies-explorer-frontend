@@ -10,7 +10,7 @@ function MoviesCard({ card }) {
           <h3 className="card__name">33 слова о дизайне</h3>
           <time className="card__duration">1ч 47м</time>
         </div>
-        <button className="card__save-button">
+        <button type="button" className="card__save-button">
           <img
             src={card.isLiked ? cardSavedFlag : cardNotSavedFlag}
             alt="Сохранить"

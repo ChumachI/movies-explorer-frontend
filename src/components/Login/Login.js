@@ -60,6 +60,7 @@ function Login({
           className="login__form-button"
           onClick={handleLogin}
           disabled={formValid}
+          type="submit"
         >
           Войти
         </button>

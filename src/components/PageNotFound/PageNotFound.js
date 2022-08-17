@@ -12,6 +12,7 @@ function PageNotFound() {
       <button
         onClick={goBack}
         className="page-not-found__link-to-previous-page"
+        type="button"
       >
         Назад
       </button>

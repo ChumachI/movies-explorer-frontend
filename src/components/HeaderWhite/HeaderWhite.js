@@ -28,7 +28,7 @@ function HeaderWhite({ isPopupShown, showPopup, closePopup }) {
         </nav>
         <AccountButton />
       </div>
-      <button className="header__burger" onClick={showPopup}>
+      <button className="header__burger" type="button" onClick={showPopup}>
         <div className="header__burger-line"></div>
         <div className="header__burger-line"></div>
         <div className="header__burger-line"></div>

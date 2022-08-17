@@ -78,6 +78,7 @@ function Register({
           className="register__form-button"
           onClick={handleRegistration}
           disabled={formValid}
+          type="submit"
         >
           Зарегистрироваться
         </button>

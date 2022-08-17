@@ -2,12 +2,16 @@ import { NavLink } from "react-router-dom";
 import AccountButton from "../AccountButton/AccountButton";
 import "./Popup.css";
 
-function Popup({closePopup}) {
+function Popup({ closePopup }) {
   return (
     <div className="popup">
       <div className="popup__overlay"></div>
       <div className="popup__continer">
-        <button className="popup__close" onClick={closePopup}></button>
+        <button
+          className="popup__close"
+          onClick={closePopup}
+          type="button"
+        ></button>
         <nav className="popup__navigation">
           <NavLink
             className="popup__link"
@@ -32,7 +36,7 @@ function Popup({closePopup}) {
             Сохранённые фильмы
           </NavLink>
         </nav>
-        <AccountButton/>
+        <AccountButton />
       </div>
     </div>
   );
