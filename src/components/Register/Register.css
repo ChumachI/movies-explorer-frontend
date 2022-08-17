@@ -1,0 +1,134 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 396px;
+  padding-top: 70px;
+}
+
+.register__header {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin: 0;
+  margin-top: 40px;
+}
+
+.register__form {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.register__form-field {
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 14px;
+  line-height: 17px;
+  margin-top: 4px;
+  padding: 0 0 10px 0;
+}
+
+.register__form-field:focus {
+  outline: none;
+  border-color: #ff6838;
+}
+
+.register__form-field-label {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #a0a0a0;
+  display: flex;
+  flex-direction: column;
+}
+
+.register__form-field-error {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  margin-top: 6px;
+  min-height: 12px;
+}
+
+.register__form-button {
+  border: none;
+  width: 396px;
+  height: 45px;
+  background: #ff6838;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+  margin-top: 127px;
+}
+
+.register__form-button:disabled {
+  background: #f8f8f8;
+  color: #c2c2c2;
+}
+
+.register__form-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.register__offer-to-login {
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #a0a0a0;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.register__link-to-login {
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #ff6838;
+  margin-left: 7px;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 769px) {
+  .register {
+    padding-top: 232px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .register {
+    align-items: center;
+    padding-top: 56px;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-sizing: border-box;
+  }
+
+  .register__header {
+    margin-top: 50px;
+  }
+  .register__form {
+    margin-top: 80px;
+  }
+  .register__form-button {
+    width: 260px;
+    margin-top: 216px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register__offer-to-login {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 6px;
+  }
+  .register__link-to-login {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
