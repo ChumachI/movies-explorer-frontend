@@ -37,6 +37,7 @@ function Login({
             type="email"
             value={email}
             onChange={(e) => handleChange(e)}
+            autoComplete="email"
           />
           <span className="login__form-field-error">
             {emailDirty && emailError && emailError}
@@ -51,6 +52,7 @@ function Login({
             type="password"
             value={password}
             onChange={(e) => handleChange(e)}
+            autoComplete="current-password"
           />
           <span className="login__form-field-error">
             {passwordDirty && passwordError && passwordError}

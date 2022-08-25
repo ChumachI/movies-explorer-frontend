@@ -53,6 +53,14 @@
   min-height: 12px;
 }
 
+.register__err-message {
+  width: 300px;
+  text-align: center;
+  align-self: center;
+  position: relative;
+  top: 120px;
+}
+
 .register__form-button {
   border: none;
   width: 396px;

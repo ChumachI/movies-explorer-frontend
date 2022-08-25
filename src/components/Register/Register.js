@@ -16,6 +16,7 @@ function Register({
   passwordError,
   emailError,
   nameError,
+  registrationErr,
 }) {
   const [formValid, setFormValid] = useState(false);
 
@@ -25,7 +26,7 @@ function Register({
     } else {
       setFormValid(false);
     }
-  }, [passwordError, emailError, nameError]);
+  }, [passwordError, emailError, nameError, name, email, password]);
 
   return (
     <section className="register">
@@ -74,6 +75,7 @@ function Register({
             {passwordDirty && passwordError && passwordError}
           </span>
         </label>
+        {registrationErr && <p className="register__err-message">{registrationErr}</p>}
         <button
           className="register__form-button"
           onClick={handleRegistration}

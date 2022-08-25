@@ -4,6 +4,9 @@
   background: #fdfdfd;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
+  overflow: hidden;
+  color: black;
+  text-decoration: none;
 }
 
 .card:hover {

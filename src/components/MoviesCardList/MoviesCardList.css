@@ -35,6 +35,13 @@
   border-radius: 6px;
 }
 
+.movies-list__message {
+  width: 300px;
+  grid-column-end: 3;
+  text-align: center;
+
+}
+
 .movies-list__more-button:hover {
   opacity: 0.8;
   cursor: pointer;
