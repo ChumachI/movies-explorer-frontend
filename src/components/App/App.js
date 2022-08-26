@@ -9,13 +9,15 @@ import Register from "../Register/Register";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import Footer from "../Footer/Footer";
 import CurrentUserContext from "../../utils/context/currentUserContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import ErrorPopup from "../ErrorPopup/ErrorPopup";
 import { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { auth } from "../../utils/Auth";
 import { mainApi } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
 import { useEffect } from "react";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+
 
 function App() {
   const [email, setEmail] = useState("");
@@ -39,6 +41,8 @@ function App() {
   const [isLoading, setLoading] = useState(false);
   const [isLoadingErr, setLoadingErr] = useState(false);
   const [registrationErr, setRegistrationErr] = useState('');
+  const [isErrorPopupOpen, setErrorPopupOpen] = useState(false);
+  const [errorPopupMessage, setErrorPopupMessage] = useState('')
 
   const history = useHistory();
 
@@ -57,16 +61,24 @@ function App() {
           setSavedMovies(data.data);
         })
         .catch((err) => {
-          console.log("произошла ошибка при получении фильмов" + err);
+          setErrorPopupOpen(true);
+          setErrorPopupMessage('Ошибка при получении сохраненных видео');
         });
     }
   }, [isLoggedIn, cards]);
 
   useEffect(() => {
+    if(localStorage.getItem("jwt")){
     mainApi.getUserInfo().then((data) => {
       setCurrentUser(data.user);
-      setName(data.user.name);
-    });
+    })
+    .catch((err)=>{
+      setErrorPopupOpen(true);
+      setErrorPopupMessage('Ошибка при получении данных пользователя');
+      console.log(err)
+
+    })
+  }
   }, [isLoggedIn]);
 
   useEffect(() => {
@@ -75,6 +87,7 @@ function App() {
   }, [isLoggedIn]);
 
   function tokenCheck() {
+    
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       if (jwt) {
@@ -82,13 +95,15 @@ function App() {
           .getContent(jwt)
           .then((res) => {
             if (res) {
-              setEmail(res.user.email);
+              setCurrentUser(res.user);
               setLoggedIn(true);
               history.push("/movies");
             }
           })
           .catch((err) => {
-            console.log(err);
+            setErrorPopupOpen(true);
+            setErrorPopupMessage('Ошибка при получении данных пользователя');
+            console.log(err)
           });
       }
     }
@@ -177,7 +192,8 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log("Ошибка при входе " + err);
+        setErrorPopupOpen(true);
+        setErrorPopupMessage('Произошла ошибка');
       });
   }
 
@@ -189,7 +205,6 @@ function App() {
     setEmailError("");
     history.push("/");
     localStorage.removeItem("jwt");
-    localStorage.clear();
     setLoggedIn(false);
   }
 
@@ -199,6 +214,11 @@ function App() {
 
   function closePopup() {
     setPopupShown(false);
+  }
+
+  function closeErrorPopup(){
+    setErrorPopupOpen(false);
+    setErrorPopupMessage('');
   }
 
   function handleSearch() {
@@ -257,7 +277,8 @@ function App() {
         localStorage.setItem("movies", JSON.stringify(newData));
       })
       .catch((err) => {
-        console.log("произошла ошибка при удалении фильма " + err);
+        setErrorPopupOpen(true);
+        setErrorPopupMessage('Произошла ошибка при удалении фильма');
       });
   }
 
@@ -279,7 +300,8 @@ function App() {
         localStorage.setItem("movies", JSON.stringify(newData));
       })
       .catch((err) => {
-        console.log("произошла ошибка при сохранении фильма " + err);
+        setErrorPopupOpen(true);
+        setErrorPopupMessage('Произошла ошибка при сохранении фильма');
       });
   }
 
@@ -288,6 +310,10 @@ function App() {
     mainApi.setProfileInfo(name, email)
     .then((data)=>{
       setCurrentUser({email: data.data.email, name:  data.data.email})
+    })
+    .catch(()=>{
+      setErrorPopupOpen(true);
+      setErrorPopupMessage('Произошла ошибка при изменении данных пользователя');
     })
     
   }
@@ -380,6 +406,7 @@ function App() {
         </Switch>
       </CurrentUserContext.Provider>
       <Footer />
+      <ErrorPopup isErrorPopupOpen = {isErrorPopupOpen} errorPopupMessage = {errorPopupMessage} closeErrorPopup={closeErrorPopup}/>
     </div>
   );
 }

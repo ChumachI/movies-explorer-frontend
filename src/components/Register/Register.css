@@ -59,6 +59,11 @@
   align-self: center;
   position: relative;
   top: 120px;
+  margin: auto;
+}
+
+.register__button-container {
+  align-items: center;
 }
 
 .register__form-button {

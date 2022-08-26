@@ -75,15 +75,17 @@ function Register({
             {passwordDirty && passwordError && passwordError}
           </span>
         </label>
-        {registrationErr && <p className="register__err-message">{registrationErr}</p>}
-        <button
-          className="register__form-button"
-          onClick={handleRegistration}
-          disabled={formValid}
-          type="submit"
-        >
-          Зарегистрироваться
-        </button>
+        <div className="register__button-container">
+          {registrationErr && <p className="register__err-message">{registrationErr}</p>}
+          <button
+            className="register__form-button"
+            onClick={handleRegistration}
+            disabled={formValid}
+            type="submit"
+          >
+            Зарегистрироваться
+          </button>
+        </div>
         <p className="register__offer-to-login">
           Уже зарегистрированы?
           <Link to="/signin" className="register__link-to-login">

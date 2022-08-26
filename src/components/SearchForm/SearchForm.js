@@ -14,7 +14,7 @@ function SearchForm({handleSearch}) {
       const shorts = JSON.parse(localStorage.getItem("shorts"));
       setShowShort(shorts);
     } else {
-      localStorage.setItem(JSON.stringify(localStorage.setItem("shorts", showShort)))
+      localStorage.setItem("shorts", JSON.stringify(showShort))
     }
   },[])
 
