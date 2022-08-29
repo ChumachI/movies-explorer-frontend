@@ -1,9 +1,6 @@
-import { MainApiConfig } from "./MainApiConfig.js";
-
 class MainApi {
   constructor(options) {
     this._commonUrlPart = options.commonUrlPart;
-    this._headers = options.headers;
   }
 
   _checkResult(result) {
@@ -21,9 +18,13 @@ class MainApi {
   }
 
   setProfileInfo(name, email) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._commonUrlPart}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+    },
       body: JSON.stringify({
         name: `${name}`,
         email: `${email}`,
@@ -32,9 +33,13 @@ class MainApi {
   }
 
   postNewMovie(card) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._commonUrlPart}/movies`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         country: card.country || 'Not defined',
         director: card.director || 'Not defined',
@@ -44,7 +49,7 @@ class MainApi {
         image: `${"https://api.nomoreparties.co/" + card.image.url}` || 'Not defined',
         trailerLink: card.trailerLink,
         thumbnail: `${"https://api.nomoreparties.co/" + card.image.url}` || 'Not defined',
-        movieId: card.movieId || 'Not defined',
+        movieId: card.id,
         nameRU: card.nameRU || 'Not defined',
         nameEN: card.nameEN || 'Not defined',
       }),
@@ -53,17 +58,27 @@ class MainApi {
 
   deleteSavedMovie(id) {
     if (!id) return;
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._commonUrlPart}/movies/${id}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+    }
     }).then((result) => this._checkResult(result));
   }
 
-  getAllMovies() {
+  getAllSavedMovies(token) {
     return fetch(`${this._commonUrlPart}/movies`, {
-      headers: this._headers,
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+    }
     }).then((result) => this._checkResult(result));
   }
 }
 
-export const mainApi = new MainApi(MainApiConfig);
+export const mainApi = new MainApi({
+  commonUrlPart: 'https://api.movies.chumak.nomoredomains.xyz',
+});

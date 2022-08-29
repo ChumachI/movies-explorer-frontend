@@ -1,4 +1,4 @@
-.error-popup{
+.info-popup{
   position: fixed;
   top: 0;
   left: 0;
@@ -13,13 +13,13 @@
   transition: visibility .5s, opacity 0.5s linear;
 }
 
-.error-popup_opened {
+.info-popup_opened {
   display: flex;
   opacity: 1;
   visibility: visible;
 }
 
-.error-popup__container {
+.info-popup__container {
   width: 430px;
   display:flex;
   flex-direction: column;
@@ -29,7 +29,7 @@
   padding: 36px;
   box-sizing: border-box;
 }
-.error-popup__close {
+.info-popup__close {
   position: absolute;
   top: -40px;
   right: -40px;
@@ -41,19 +41,19 @@
   background-size: contain;
 }
 
-.error-popup__close:hover {
+.info-popup__close:hover {
   opacity: .6;
   cursor: pointer;
 }
 
-.error-popup__info-image {
+.info-popup__info-image {
   justify-self: center;
   align-self: center;
   margin: 24px auto 32px auto;
   width: 120px;
 }
 
-.error-popup__header {
+.info-popup__header {
   margin: 0;
   font-weight: 900;
   font-size: 24px;
@@ -63,7 +63,7 @@
 }
 
 @media screen and (max-width: 438px) {
-  .error-popup__header {
+  .info-popup__header {
       font-size: 18px;
       line-height: 22px;
   }
@@ -72,7 +72,7 @@
 
 
 @media screen and (max-width: 468px) {
-  .error-popup__container {
+  .info-popup__container {
       width: calc(100% - 38px);
       padding: 22px;
       padding-top: 25px;
@@ -81,7 +81,7 @@
 }
 
 @media screen and (max-width: 550px) {
-  .error-popup__close {
+  .info-popup__close {
       right: 0;
       top: -36px;
       width: 20px;

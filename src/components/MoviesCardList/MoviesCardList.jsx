@@ -1,6 +1,6 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Preloader from "../Preloader/Preloader";
 
 function MoviesCardList({
@@ -9,12 +9,25 @@ function MoviesCardList({
   handleDeleteMovie,
   handleSaveMovie,
   isLoadingErr,
+  isFirstVisit,
 }) {
   const totalCardsNumber = cards.length;
   const isFound = cards.length > 0;
   const [shownCardsCounter, setshownCardsCounter] = useState(
     getShownCardsCounter()
   );
+
+  useEffect(() => {
+    window.addEventListener("resize", changeShownCardsCounter);
+    return () => {
+      window.removeEventListener("resize", changeShownCardsCounter);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function changeShownCardsCounter() {
+    setshownCardsCounter(getShownCardsCounter());
+  }
 
   function getShownCardsCounter() {
     const windowWidth = window.innerWidth;
@@ -29,10 +42,6 @@ function MoviesCardList({
   const shownCards = cards.slice(0, shownCardsCounter);
   const isEachCardShown = shownCardsCounter >= totalCardsNumber;
 
-  window.addEventListener("resize", function () {
-    setshownCardsCounter(getShownCardsCounter());
-  });
-
   function handleMoreButtonClick() {
     setshownCardsCounter(shownCardsCounter + getShownCardsCounter() / 4);
   }
@@ -42,8 +51,13 @@ function MoviesCardList({
       <ul className="movies-list__list">
         {isLoading ? (
           <Preloader />
+        ) : isFirstVisit ? (
+          ""
         ) : isLoadingErr ? (
-          <p className="movies-list__message">Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</p>
+          <p className="movies-list__message">
+            Во время запроса произошла ошибка. Возможно, проблема с соединением
+            или сервер недоступен. Подождите немного и попробуйте ещё раз
+          </p>
         ) : isFound ? (
           shownCards.map((card, index) => {
             return (

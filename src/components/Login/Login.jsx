@@ -2,26 +2,64 @@ import "./Login.css";
 import Logo from "../Logo/Logo";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-function Login({
-  handleBlur,
-  handleChange,
-  emailDirty,
-  passwordDirty,
-  email,
-  password,
-  passwordError,
-  emailError,
-  handleLogin,
-}) {
-  const [formValid, setFormValid] = useState(false);
+function Login({ handleLogin }) {
+  const [formNotValidValid, setFormNotValid] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailDirty, setEmailDirty] = useState(false);
+  const [passwordDirty, setPasswordDirty] = useState(false);
+  const [emailError, setEmailError] = useState(
+    'Поле "e-mail"  не может быть пустым'
+  );
+  const [passwordError, setPasswordError] = useState(
+    'Поле "пароль" не может быть пустым'
+  );
 
   useEffect(() => {
     if (passwordError || emailError) {
-      setFormValid(true);
+      setFormNotValid(true);
     } else {
-      setFormValid(false);
+      setFormNotValid(false);
     }
   }, [passwordError, emailError]);
+
+  function handleBlur(e) {
+    switch (e.target.name) {
+      case "email":
+        setEmailDirty(true);
+        break;
+      case "password":
+        setPasswordDirty(true);
+        break;
+      default:
+    }
+  }
+
+  function handleChange(e) {
+    switch (e.target.name) {
+      case "email":
+        setEmailDirty(true);
+        setEmail(e.target.value);
+        const re =
+          /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        if (!re.test(e.target.value.toLocaleLowerCase())) {
+          setEmailError("Некорректный email");
+        } else {
+          setEmailError("");
+        }
+        break;
+      case "password":
+        setPasswordDirty(true);
+        setPassword(e.target.value);
+        if (e.target.value.length < 8) {
+          setPasswordError("Длина пароля должна быть не менее 8 символов");
+        } else {
+          setPasswordError("");
+        }
+        break;
+      default:
+    }
+  }
 
   return (
     <section className="login">
@@ -61,7 +99,7 @@ function Login({
         <button
           className="login__form-button"
           onClick={handleLogin}
-          disabled={formValid}
+          disabled={formNotValidValid}
           type="submit"
         >
           Войти

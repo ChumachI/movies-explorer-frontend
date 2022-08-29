@@ -1,8 +1,6 @@
-import {MainApiConfig} from './MoviesApiConfig'
 class MoviesApi {
-  constructor(options) {
-      this._commonUrlPart = options.commonUrlPart;
-      this._headers = options.headers;
+  constructor() {
+      this._commonUrlPart = 'https://api.nomoreparties.co/beatfilm-movies';
   }
   _checkResult(result) {
     if (result.ok) {
@@ -15,11 +13,10 @@ class MoviesApi {
 
   getAllMovies() {
     return fetch(`${this._commonUrlPart}`, {
-      headers: this._headers
     })
     .then(result => this._checkResult(result))
 }
 
 }
 
-export const moviesApi = new MoviesApi(MainApiConfig);
+export const moviesApi = new MoviesApi();
