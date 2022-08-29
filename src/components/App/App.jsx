@@ -312,10 +312,6 @@ function App() {
             />
           </Route>
 
-          <Route path="*">
-            <PageNotFound history={history} />
-          </Route>
-
           <Route path="/signin">
             {isLoggedIn ? (
               <Redirect to="/movies" />
@@ -334,6 +330,9 @@ function App() {
               />
             )}
           </Route>
+          <Route path="*">
+              <PageNotFound history={history} />
+            </Route>
         </Switch>
       </CurrentUserContext.Provider>
       <Footer />
