@@ -1,21 +1,20 @@
-import { useLocation, Route } from "react-router-dom";
-import HeaderWhite from "../HeaderWhite/HeaderWhite";
-import HeaderBlue from "../HeaderBlue/HeaderBlue";
+import { Route } from "react-router-dom";
+import HeaderLoggedIn from "../HeaderLoggedIn/HeaderLoggedIn";
+import HeaderNotLoggedIn from "../HeaderNotLoggedIn/HeaderNotLoggedIn";
 
 function Header({ isPopupShown, showPopup, closePopup, isLoggedIn }) {
   const endpoints = ["/movies", "/saved-movies", "/profile", "/"];
-  const isMainRoute = useLocation().pathname === "/";
 
   return (
     <Route exact path={endpoints}>
-      {isMainRoute ? (
-        <HeaderBlue />
-      ) : (
-        <HeaderWhite
+      {isLoggedIn ? (
+        <HeaderLoggedIn
           isPopupShown={isPopupShown}
           showPopup={showPopup}
           closePopup={closePopup}
         />
+      ) : (
+        <HeaderNotLoggedIn />
       )}
     </Route>
   );

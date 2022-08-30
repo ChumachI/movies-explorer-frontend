@@ -268,6 +268,7 @@ function App() {
         isPopupShown={isPopupShown}
         showPopup={showPopup}
         closePopup={closePopup}
+        isLoggedIn = {isLoggedIn}
       />
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>

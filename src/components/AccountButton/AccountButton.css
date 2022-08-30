@@ -15,6 +15,11 @@
   justify-self: end;
 }
 
+.account-button_white {
+  background-color: lightblue;
+  box-shadow: 0px 3px 14px rgba(255, 255, 255, 0.08);
+}
+
 .account-button:hover {
   opacity: 0.8;
 }
