@@ -116,6 +116,7 @@ function App() {
   }
 
   function handleRegistration(e) {
+    localStorage.clear();
     setLoading(true);
     e.preventDefault();
     const name = e.target.form.name.value;
@@ -176,6 +177,7 @@ function App() {
 
   function handleExit() {
     localStorage.removeItem("jwt");
+    setCurrentUser({});
     history.push("/");
     setLoggedIn(false);
   }
