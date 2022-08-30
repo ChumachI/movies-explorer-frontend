@@ -2,7 +2,7 @@ import { useLocation, Route } from "react-router-dom";
 import HeaderWhite from "../HeaderWhite/HeaderWhite";
 import HeaderBlue from "../HeaderBlue/HeaderBlue";
 
-function Header({ isPopupShown, showPopup, closePopup }) {
+function Header({ isPopupShown, showPopup, closePopup, isLoggedIn }) {
   const endpoints = ["/movies", "/saved-movies", "/profile", "/"];
   const isMainRoute = useLocation().pathname === "/";
 
