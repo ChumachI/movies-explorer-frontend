@@ -10,6 +10,7 @@ function MoviesCardList({
   handleSaveMovie,
   isLoadingErr,
   isFirstVisit,
+  isLikeDislikeRequestOn
 }) {
   const totalCardsNumber = cards.length;
   const isFound = cards.length > 0;
@@ -66,6 +67,7 @@ function MoviesCardList({
                 key={index}
                 handleDeleteMovie={handleDeleteMovie}
                 handleSaveMovie={handleSaveMovie}
+                isLikeDislikeRequestOn={isLikeDislikeRequestOn}
               />
             );
           })

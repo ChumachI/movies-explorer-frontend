@@ -1,13 +1,25 @@
 import "./MoviesCard.css";
 import cardSavedFlag from "../../images/saved.svg";
 import cardNotSavedFlag from "../../images/not_saved.svg";
+import deleteCardImg from "../../images/DeleteCardImg.svg"
 import { useState } from "react";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-function MoviesCard({ card, handleDeleteMovie, handleSaveMovie }) {
+function MoviesCard({ card, handleDeleteMovie, handleSaveMovie, isLikeDislikeRequestOn }) {
   const hours = Math.floor(card.duration / 60);
   const minutes = card.duration % 60;
   const [isLiked, setLiked] = useState(false);
+  const [isSavedMoviesRoute, setSavedMoviesRoute] = useState(false);
+
+  const path = useLocation().pathname;
+  
+
+  useEffect(()=>{
+    if(path === '/saved-movies'){
+      setSavedMoviesRoute(true);
+    }
+  },[path])
 
   useEffect(() => {
     setLiked(card.isLiked);
@@ -34,13 +46,15 @@ function MoviesCard({ card, handleDeleteMovie, handleSaveMovie }) {
             {hours}ч {minutes}м
           </time>
         </div>
+        
         <button
           type="button"
           className="card__save-button"
           onClick={isLiked ? deleteMovie : saveMovie}
+          disabled={isLikeDislikeRequestOn}
         >
           <img
-            src={isLiked ? cardSavedFlag : cardNotSavedFlag}
+            src={isSavedMoviesRoute ?  deleteCardImg : isLiked ? cardSavedFlag : cardNotSavedFlag}
             alt="Сохранить"
           />
         </button>

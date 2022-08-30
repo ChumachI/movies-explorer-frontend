@@ -11,6 +11,7 @@ function Movies({
   savedMovies,
   cards,
   isLoadingErr,
+  isLikeDislikeRequestOn
 }) {
   const [filteredCards, setFilteredCards] = useState(cards);
   const [showShort, setShowShort] = useState(false);
@@ -61,6 +62,7 @@ function Movies({
         handleSaveMovie={handleSaveMovie}
         isLoadingErr={isLoadingErr}
         isFirstVisit={isFirstVisit}
+        isLikeDislikeRequestOn={isLikeDislikeRequestOn}
       />
     </section>
   );

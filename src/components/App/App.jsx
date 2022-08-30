@@ -30,6 +30,7 @@ function App() {
   const [isInfoPopupOpen, setInfoPopupOpen] = useState(false);
   const [infoPopupMessage, setInfoPopupMessage] = useState("");
   const [infoPopupStatus, setInfopopupStatus] = useState(false);
+  const [isLikeDislikeRequestOn, setLikeDislikeRequestOn] = useState(false);
 
   const history = useHistory();
 
@@ -199,6 +200,7 @@ function App() {
   }
 
   function handleDeleteMovie(card) {
+    setLikeDislikeRequestOn(true)
     loadSavedMovies();
     const targetCard = savedMovies.find((savedMovie) => {
       return savedMovie.movieId === card.id;
@@ -215,15 +217,18 @@ function App() {
         setCards(newCards);
         localStorage.setItem("movies", JSON.stringify(newCards));
         loadSavedMovies();
+        setLikeDislikeRequestOn(false);
       })
       .catch(() => {
         setInfoPopupMessage("Произошла ошибка при удалении видео");
         setInfopopupStatus(false);
         setInfoPopupOpen(true);
+        setLikeDislikeRequestOn(false);
       });
   }
 
   function handleSaveMovie(card) {
+    setLikeDislikeRequestOn(true);
     return mainApi
       .postNewMovie(card)
       .then((card) => {
@@ -236,11 +241,13 @@ function App() {
         });
         setCards(newCards);
         localStorage.setItem("movies", JSON.stringify(newCards));
+        setLikeDislikeRequestOn(false);
       })
       .catch((err) => {
         setInfoPopupMessage("Произошла ошибка при сохранении видео " + err);
         setInfopopupStatus(false);
         setInfoPopupOpen(true);
+        setLikeDislikeRequestOn(false);
       });
   }
 
@@ -292,6 +299,7 @@ function App() {
               isLoadingErr={isLoadingErr}
               loadAllMovies={loadAllMovies}
               loadSavedMovies={loadSavedMovies}
+              isLikeDislikeRequestOn ={isLikeDislikeRequestOn}
             />
           </Route>
 
@@ -303,6 +311,7 @@ function App() {
               isLoading={isLoading}
               savedMovies={savedMovies}
               isLoggedIn={isLoggedIn}
+              isLikeDislikeRequestOn ={isLikeDislikeRequestOn}
             />
           </Route>
 
@@ -313,6 +322,7 @@ function App() {
               isLoggedIn={isLoggedIn}
               handleSubmitUserUpdate={handleSubmitUserUpdate}
               isLoading={isLoading}
+              
             />
           </Route>
 

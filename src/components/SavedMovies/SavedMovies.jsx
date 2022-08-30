@@ -2,7 +2,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { useState } from "react";
 import { useEffect } from "react";
-function SavedMovies({ cards, handleDeleteMovie, isLoading, savedMovies }) {
+function SavedMovies({ cards, handleDeleteMovie, isLoading, savedMovies, isLikeDislikeRequestOn }) {
   const [filteredCards, setFilteredCards] = useState(cards);
   const [notShortFilms, setNotShortFilms] = useState(cards);
   const [showShort, setShowShort] = useState(false);
@@ -52,6 +52,7 @@ function SavedMovies({ cards, handleDeleteMovie, isLoading, savedMovies }) {
         cards={!showShort ? notShortFilms : filteredCards}
         handleDeleteMovie={handleDeleteMovie}
         isLoading={isLoading}
+        isLikeDislikeRequestOn ={isLikeDislikeRequestOn}
       />
     </section>
   );
