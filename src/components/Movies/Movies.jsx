@@ -21,7 +21,7 @@ function Movies({
     if (localStorage.getItem("keywords") && localStorage.getItem("movies")) {
       const keywords = localStorage.getItem("keywords");
       filterCards(keywords);
-      
+      setFirstVisit(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, savedMovies, showShort]);
