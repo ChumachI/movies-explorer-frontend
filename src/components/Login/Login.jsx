@@ -2,7 +2,7 @@ import "./Login.css";
 import Logo from "../Logo/Logo";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-function Login({ handleLogin }) {
+function Login({ handleLogin, isLoading }) {
   const [formNotValidValid, setFormNotValid] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -76,6 +76,7 @@ function Login({ handleLogin }) {
             value={email}
             onChange={(e) => handleChange(e)}
             autoComplete="email"
+            disabled={isLoading}
           />
           <span className="login__form-field-error">
             {emailDirty && emailError && emailError}
@@ -91,6 +92,7 @@ function Login({ handleLogin }) {
             value={password}
             onChange={(e) => handleChange(e)}
             autoComplete="current-password"
+            disabled={isLoading}
           />
           <span className="login__form-field-error">
             {passwordDirty && passwordError && passwordError}
@@ -99,7 +101,7 @@ function Login({ handleLogin }) {
         <button
           className="login__form-button"
           onClick={handleLogin}
-          disabled={formNotValidValid}
+          disabled={formNotValidValid || isLoading}
           type="submit"
         >
           Войти

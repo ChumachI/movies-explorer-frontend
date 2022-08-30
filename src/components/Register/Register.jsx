@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import "./Register.css";
 
-function Register({ handleRegistration, registrationErrMessage }) {
+function Register({ handleRegistration, registrationErrMessage, isLoading }) {
   const [formValid, setFormValid] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -98,6 +98,7 @@ function Register({ handleRegistration, registrationErrMessage }) {
             type="text"
             value={name}
             onChange={handleChange}
+            disabled={isLoading}
           />
           <span className="register__form-field-error">
             {nameDirty && nameError && nameError}
@@ -112,6 +113,7 @@ function Register({ handleRegistration, registrationErrMessage }) {
             type="email"
             value={email}
             onChange={handleChange}
+            disabled={isLoading}
           />
           <span className="register__form-field-error">
             {emailDirty && emailError && emailError}
@@ -126,6 +128,7 @@ function Register({ handleRegistration, registrationErrMessage }) {
             type="password"
             value={password}
             onChange={handleChange}
+            disabled={isLoading}
           />
           <span className="register__form-field-error">
             {passwordDirty && passwordError && passwordError}
@@ -138,7 +141,7 @@ function Register({ handleRegistration, registrationErrMessage }) {
           <button
             className="register__form-button"
             onClick={handleRegistration}
-            disabled={formValid}
+            disabled={formValid || isLoading}
             type="submit"
           >
             Зарегистрироваться

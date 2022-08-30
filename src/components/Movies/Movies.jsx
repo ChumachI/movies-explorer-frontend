@@ -25,6 +25,15 @@ function Movies({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, savedMovies, showShort]);
+
+  useEffect(()=>{
+    if (localStorage.getItem("shorts")) {
+      const shorts = JSON.parse(localStorage.getItem("shorts"));
+      setShowShort(shorts);
+    } else {
+      localStorage.setItem("shorts", showShort);
+    }
+  },[showShort])
   
 
   function search(e) {
@@ -54,7 +63,7 @@ function Movies({
 
   return (
     <section className="movies">
-      <SearchForm handleSearch={search} showShort={showShort} setShowShort={setShowShort}/>
+      <SearchForm handleSearch={search} showShort={showShort} setShowShort={setShowShort} isLoading = {isLoading}/>
       <MoviesCardList
         cards={filteredCards}
         isLoading={isLoading}

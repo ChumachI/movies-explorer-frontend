@@ -41,6 +41,11 @@
   transition: opacity 0.2s linear;
 }
 
+.search-form__button:disabled {
+  background: grey;
+}
+
+
 .search-form__button:hover {
   cursor: pointer;
   opacity: 0.8;

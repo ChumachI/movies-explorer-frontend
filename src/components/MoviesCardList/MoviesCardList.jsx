@@ -61,7 +61,6 @@ function MoviesCardList({
           </p>
         ) : isFound ? (
           shownCards.map((card, index) => {
-            console.log(card);
             return (
               <MoviesCard
                 card={card}

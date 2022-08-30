@@ -73,6 +73,7 @@ function Profile({ handleExit, handleSubmitUserUpdate, isLoading }) {
             name="name"
             value={name}
             onChange={handleChange}
+            disabled={isLoading}
           />
         </div>
         <hr className="profile__data-separator" />
@@ -83,6 +84,7 @@ function Profile({ handleExit, handleSubmitUserUpdate, isLoading }) {
             name="email"
             value={email}
             onChange={handleChange}
+            disabled={isLoading}
           />
         </div>
 

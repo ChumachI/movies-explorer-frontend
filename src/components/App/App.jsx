@@ -116,6 +116,7 @@ function App() {
   }
 
   function handleRegistration(e) {
+    setLoading(true);
     e.preventDefault();
     const name = e.target.form.name.value;
     const email = e.target.form.email.value;
@@ -130,11 +131,13 @@ function App() {
               setLoggedIn(true);
               history.push("/movies");
             }
+            setLoading(false);
           })
           .catch((err) => {
             setInfoPopupOpen(true);
             setInfopopupStatus(false);
             setInfoPopupMessage("Произошла ошибка");
+            setLoading(false);
           });
       })
       .catch((err) => {
@@ -145,10 +148,12 @@ function App() {
         } else {
           setRegistrationErrMessage("Произошла ошибка при регистрации");
         }
+        setLoading(false);
       });
   }
 
   function handleLogin(e) {
+    setLoading(true);
     e.preventDefault();
     const password = e.target.form.password.value;
     const email = e.target.form.email.value;
@@ -158,12 +163,14 @@ function App() {
         if (data.token) {
           setLoggedIn(true);
           history.push("/movies");
+          setLoading(false);
         }
       })
       .catch((err) => {
         setInfoPopupOpen(true);
         setInfopopupStatus(false);
         setInfoPopupMessage("Произошла ошибка");
+        setLoading(false);
       });
   }
 
@@ -330,7 +337,7 @@ function App() {
             {isLoggedIn ? (
               <Redirect to="/movies" />
             ) : (
-              <Login handleLogin={handleLogin} />
+              <Login handleLogin={handleLogin} isLoading={isLoading}/>
             )}
           </Route>
 
@@ -341,6 +348,7 @@ function App() {
               <Register
                 handleRegistration={handleRegistration}
                 registrationErrMessage={registrationErrMessage}
+                isLoading={isLoading}
               />
             )}
           </Route>
