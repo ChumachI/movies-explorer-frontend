@@ -245,20 +245,23 @@ function App() {
   }
 
   function handleSubmitUserUpdate(e) {
+    setLoading(true);
     const name = e.target.form.name.value;
     const email = e.target.form.email.value;
-    mainApi
+    return mainApi
       .setProfileInfo(name, email)
       .then((data) => {
         setCurrentUser(data.data);
         setInfoPopupOpen(true);
         setInfopopupStatus(true);
         setInfoPopupMessage("Данные успешно обновлены!");
+        setLoading(false);
       })
       .catch((err) => {
         setInfoPopupOpen(true);
         setInfopopupStatus(false);
         setInfoPopupMessage("Произошла ошибка при редактировании профиля");
+        setLoading(false);
       });
   }
 
@@ -309,6 +312,7 @@ function App() {
               handleExit={handleExit}
               isLoggedIn={isLoggedIn}
               handleSubmitUserUpdate={handleSubmitUserUpdate}
+              isLoading={isLoading}
             />
           </Route>
 

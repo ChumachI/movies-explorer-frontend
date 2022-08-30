@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import CurrentUserContext from "../../utils/context/currentUserContext";
 import "./Profile.css";
-function Profile({ handleExit, handleSubmitUserUpdate }) {
+function Profile({ handleExit, handleSubmitUserUpdate, isLoading }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser.name);
   const [email, setEmail] = useState(currentUser.email);
@@ -11,6 +11,18 @@ function Profile({ handleExit, handleSubmitUserUpdate }) {
 
   const [isChangeHappend, setChangeHappend] = useState(false);
   const [formInvalid, setFormInvalid] = useState(true);
+
+  function handleSubmit(e) {
+    handleSubmitUserUpdate(e)
+    .then(()=>{
+      setChangeHappend(false);
+    })
+    .catch(()=>{
+      setChangeHappend(false);
+    })
+    
+  }
+
 
   function handleChange(e) {
     switch (e.target.name) {
@@ -79,14 +91,14 @@ function Profile({ handleExit, handleSubmitUserUpdate }) {
             className="profile__edit-button"
             htmlFor="edit"
             type="button"
-            onClick={handleSubmitUserUpdate}
-            disabled={formInvalid || !isChangeHappend}
+            onClick={handleSubmit}
+            disabled={formInvalid || !isChangeHappend || isLoading}
           >
             {!isChangeHappend
               ? "Для редактирования внесите изменения"
               : formInvalid
               ? emailError || nameError
-              : "Редактировать"}
+              : isLoading ? "Сохранение...": "Редактировать"}
           </button>
           <button
             className="profile__exit-button"
