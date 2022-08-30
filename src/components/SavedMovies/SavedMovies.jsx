@@ -5,7 +5,7 @@ import { useEffect } from "react";
 function SavedMovies({ cards, handleDeleteMovie, isLoading, savedMovies }) {
   const [filteredCards, setFilteredCards] = useState(cards);
   const [notShortFilms, setNotShortFilms] = useState(cards);
-  const [isShorts, setShorts] = useState(false);
+  const [showShort, setShowShort] = useState(false);
 
   useEffect(() => {
     const likedCards = cards.filter((card) => card.isLiked);
@@ -29,7 +29,7 @@ function SavedMovies({ cards, handleDeleteMovie, isLoading, savedMovies }) {
   }
 
   function filterCards(keywords) {
-    setShorts(JSON.parse(localStorage.getItem("shorts")));
+    setShowShort(JSON.parse(localStorage.getItem("shorts")));
 
     const filteredCards = cards.filter((card) => {
       if (!card.isLiked) {
@@ -47,9 +47,9 @@ function SavedMovies({ cards, handleDeleteMovie, isLoading, savedMovies }) {
 
   return (
     <section className="saved-movies">
-      <SearchForm handleSearch={search} />
+      <SearchForm handleSearch={search} showShort= {showShort} setShowShort={setShowShort}/>
       <MoviesCardList
-        cards={!isShorts ? notShortFilms : filteredCards}
+        cards={!showShort ? notShortFilms : filteredCards}
         handleDeleteMovie={handleDeleteMovie}
         isLoading={isLoading}
       />

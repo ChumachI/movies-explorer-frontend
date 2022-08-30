@@ -1,22 +1,26 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./SearchForm.css";
 
-function SearchForm({ handleSearch }) {
+function SearchForm({ handleSearch, showShort, setShowShort }) {
   const [keyword, setKeyword] = useState("");
-  const [showShort, setShowShort] = useState(false);
+  const path = useLocation().pathname;
+  
 
   useState(() => {
-    if (localStorage.getItem("keywords")) {
-      const keyword = localStorage.getItem("keywords");
-      setKeyword(keyword);
+    if(path === '/movies'){
+      if (localStorage.getItem("keywords")) {
+        const keyword = localStorage.getItem("keywords");
+        setKeyword(keyword);
+      }
+      if (localStorage.getItem("shorts")) {
+        const shorts = JSON.parse(localStorage.getItem("shorts"));
+        setShowShort(shorts);
+      } else {
+        localStorage.setItem("shorts", showShort);
+      }
     }
-    if (localStorage.getItem("shorts")) {
-      const shorts = JSON.parse(localStorage.getItem("shorts"));
-      setShowShort(shorts);
-    } else {
-      localStorage.setItem("shorts", JSON.stringify(showShort));
-    }
-  }, []);
+  }, [path]);
 
   function handleChange(e) {
     setKeyword(e.target.value);

@@ -13,6 +13,8 @@ function Movies({
   isLoadingErr,
 }) {
   const [filteredCards, setFilteredCards] = useState(cards);
+  const [showShort, setShowShort] = useState(false);
+  const [isFirstVisit, setFirstVisit] = useState(true);
 
   useEffect(() => {
     if (localStorage.getItem("keywords") && localStorage.getItem("movies")) {
@@ -21,8 +23,8 @@ function Movies({
       setFirstVisit(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading, savedMovies]);
-  const [isFirstVisit, setFirstVisit] = useState(true);
+  }, [isLoading, savedMovies, showShort]);
+  
 
   function search(e) {
     e.preventDefault();
@@ -40,9 +42,8 @@ function Movies({
   }
 
   function filterCards(keywords) {
-    const shorts = JSON.parse(localStorage.getItem("shorts"));
     const newFilteredCards = cards.filter((card) => {
-      if (!shorts && card.duration <= 40) {
+      if (!showShort && card.duration <= 40) {
         return false;
       }
       return card.nameRU.toLowerCase().includes(keywords.toLowerCase());
@@ -52,7 +53,7 @@ function Movies({
 
   return (
     <section className="movies">
-      <SearchForm handleSearch={search} />
+      <SearchForm handleSearch={search} showShort={showShort} setShowShort={setShowShort}/>
       <MoviesCardList
         cards={filteredCards}
         isLoading={isLoading}
