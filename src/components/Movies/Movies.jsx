@@ -18,7 +18,7 @@ function Movies({
   const [isFirstVisit, setFirstVisit] = useState(true);
 
   useEffect(() => {
-    if (localStorage.getItem("keywords") && localStorage.getItem("movies")) {
+    if ((localStorage.getItem("keywords") !== null) && localStorage.getItem("movies")) {
       const keywords = localStorage.getItem("keywords");
       filterCards(keywords);
       setFirstVisit(false)
@@ -59,7 +59,7 @@ function Movies({
       }
       return card.nameRU.toLowerCase().includes(keywords.toLowerCase());
     });
-    setFilteredCards(newFilteredCards);
+    setFilteredCards(newFilteredCards); 
   }
 
   return (

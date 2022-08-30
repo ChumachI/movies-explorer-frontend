@@ -39,7 +39,7 @@ function App() {
       const allCards = JSON.parse(localStorage.getItem("movie"));
       setCards(allCards);
     }
-  }, []);
+  }, [cards]);
 
   useEffect(() => {
     loadSavedMovies();
@@ -200,13 +200,23 @@ function App() {
     if (localStorage.getItem("movies")) {
       setLoading(false);
       return Promise.resolve();
+      
     } else {
-      return moviesApi.getAllMovies().then((data) => {
+      return moviesApi.getAllMovies()
+      .then((data) => {
         setCards(data);
         localStorage.setItem("movies", JSON.stringify(data));
         setLoading(false);
-      });
+        return Promise.resolve();
+      })
+      .catch(()=>{
+        setInfoPopupOpen(true);
+        setInfopopupStatus(false);
+        setInfoPopupMessage("Произошла ошибка во время поиска");
+        setLoading(false);
+      })
     }
+    
   }
 
   function handleDeleteMovie(card) {
