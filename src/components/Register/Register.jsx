@@ -99,6 +99,7 @@ function Register({ handleRegistration, registrationErrMessage, isLoading }) {
             value={name}
             onChange={handleChange}
             disabled={isLoading}
+            autoComplete="name"
           />
           <span className="register__form-field-error">
             {nameDirty && nameError && nameError}
@@ -114,6 +115,7 @@ function Register({ handleRegistration, registrationErrMessage, isLoading }) {
             value={email}
             onChange={handleChange}
             disabled={isLoading}
+            autoComplete="email"
           />
           <span className="register__form-field-error">
             {emailDirty && emailError && emailError}
@@ -129,6 +131,7 @@ function Register({ handleRegistration, registrationErrMessage, isLoading }) {
             value={password}
             onChange={handleChange}
             disabled={isLoading}
+            autoComplete="new-password"
           />
           <span className="register__form-field-error">
             {passwordDirty && passwordError && passwordError}

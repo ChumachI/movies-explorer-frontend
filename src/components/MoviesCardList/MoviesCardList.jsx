@@ -13,10 +13,14 @@ function MoviesCardList({
   isLikeDislikeRequestOn
 }) {
   const totalCardsNumber = cards.length;
-  const isFound = cards.length > 0;
   const [shownCardsCounter, setshownCardsCounter] = useState(
     getShownCardsCounter()
   );
+  const [isFound, setFound] = useState(false);
+
+  useEffect(()=>{
+    setFound(cards.length > 0)
+  },[cards])
 
   useEffect(() => {
     window.addEventListener("resize", changeShownCardsCounter);
