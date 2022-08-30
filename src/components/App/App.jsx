@@ -44,7 +44,7 @@ function App() {
   useEffect(() => {
     loadSavedMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (localStorage.getItem("movies")) {
