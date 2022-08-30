@@ -131,8 +131,9 @@ function App() {
             if (data.token) {
               setLoggedIn(true);
               history.push("/movies");
+              setLoading(false);
             }
-            setLoading(false);
+            
           })
           .catch((err) => {
             setInfoPopupOpen(true);

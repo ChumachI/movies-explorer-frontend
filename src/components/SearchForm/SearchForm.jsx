@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./SearchForm.css";
 
-function SearchForm({ handleSearch, showShort, setShowShort, isLoading }) {
+function SearchForm({ handleSearch, showShort, setShowShort }) {
   const [keyword, setKeyword] = useState("");
   const path = useLocation().pathname;
 
@@ -41,7 +41,6 @@ function SearchForm({ handleSearch, showShort, setShowShort, isLoading }) {
           type="submit"
           className="search-form__button"
           onClick={handleSearch}
-          disabled={isLoading}
         >
           Найти
         </button>
@@ -53,7 +52,6 @@ function SearchForm({ handleSearch, showShort, setShowShort, isLoading }) {
           className="search-form__invisible-checkbox"
           checked={showShort}
           onChange={toggleShort}
-          disabled={isLoading}
         />
         <div className="search-form__visible-checkbox-frame">
           <div className="search-form__visible-checkbox-inner-circle"></div>
