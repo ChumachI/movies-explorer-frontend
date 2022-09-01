@@ -12,7 +12,7 @@ import CurrentUserContext from "../../utils/context/currentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import InfoPopup from "../InfoPopup/InfoPopup";
 import { useState } from "react";
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { auth } from "../../utils/Auth";
 import { mainApi } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
@@ -33,6 +33,34 @@ function App() {
   const [isLikeDislikeRequestOn, setLikeDislikeRequestOn] = useState(false);
 
   const history = useHistory();
+  let location = useLocation();
+
+  useEffect(() => {
+    if (localStorage.getItem("jwt")) {
+      const path = location.pathname;
+      const jwt = localStorage.getItem("jwt");
+      if (jwt) {
+        auth
+          .getContent(jwt)
+          .then((res) => {
+            if (res) {
+              setCurrentUser(res.user);
+              setLoggedIn(true);
+              history.push(path);
+            } else {
+              setLoggedIn(false)
+            }
+          })
+          .catch((err) => {
+            setInfoPopupOpen(true);
+            setInfopopupStatus(false);
+            setInfoPopupMessage("Ошибка при получении данных пользователя");
+            history.push('/');
+          });
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("movie")) {
@@ -53,32 +81,6 @@ function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    tokenCheck();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
-
-  function tokenCheck() {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
-      if (jwt) {
-        auth
-          .getContent(jwt)
-          .then((res) => {
-            if (res) {
-              setCurrentUser(res.user);
-              setLoggedIn(true);
-            }
-          })
-          .catch((err) => {
-            setInfoPopupOpen(true);
-            setInfopopupStatus(false);
-            setInfoPopupMessage("Ошибка при получении данных пользователя");
-          });
-      }
-    }
-  }
 
   function loadAllMovies() {
     if (localStorage.getItem("movies")) {
