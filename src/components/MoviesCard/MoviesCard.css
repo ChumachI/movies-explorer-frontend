@@ -1,0 +1,70 @@
+.card {
+  width: 364px;
+  height: 271px;
+  background: #fdfdfd;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  overflow: hidden;
+  color: black;
+  text-decoration: none;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.card__top-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px;
+}
+
+.card__name {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.card__duration {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  display: flex;
+  color: #a0a0a0;
+  margin-top: 9px;
+}
+
+.card__save-button {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.card__save-button:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.card__poster {
+  width: 100%;
+}
+
+@media screen and (max-width: 892px) {
+  .card {
+    width: 339px;
+    height: 258px;
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .card {
+    width: 300px;
+    height: 236px;
+  }
+}

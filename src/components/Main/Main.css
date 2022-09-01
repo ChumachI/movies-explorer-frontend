@@ -1,0 +1,44 @@
+.main__section-title {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  margin-bottom: 23px;
+}
+
+.main__section-separator {
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.main__section-text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  max-width: 600px;
+}
+
+@media screen and (max-width: 769px) {
+  .main__section-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .main__section-title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 28px;
+  }
+
+  .main__section-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}

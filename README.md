@@ -1,1 +1,2 @@
-# movies-explorer-frontend
+- [Ссылка на реквест](https://github.com/ChumachI/movies-explorer-frontend/pull/2)
+- [Ссылка на сайт](https://movies.chumak.nomoredomains.sbs/)
